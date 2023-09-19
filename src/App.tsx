@@ -1,8 +1,11 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
+import useGames from "./hooks/useGames";
 
 function App() {
+  const { games, error, isLoading, setGames, setError } = useGames();
+
   return (
     <Grid
       templateAreas={{
