@@ -3,9 +3,10 @@ import NavBar from "./components/NavBar";
 import GameGrid from "./components/GameGrid";
 import useGames from "./hooks/useGames";
 import GenreList from "./components/GenreList";
+import useData from "./hooks/useData";
 
 function App() {
-  const { games, error, isLoading, setGames, setError } = useGames();
+  const { data, error, isLoading } = useGames();
 
   return (
     <Grid
@@ -23,6 +24,7 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
+          {isLoading && <div className="spinner-border"></div>}
           <GenreList />
         </GridItem>
       </Show>
