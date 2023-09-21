@@ -1,4 +1,5 @@
 import useData from "./useData";
+import PlatformSelector from "../components/PlatformSelector";
 
 interface Platform {
     id: number;
@@ -8,10 +9,11 @@ interface Platform {
    
   }
 
+  const usePlatforms = () => useData<Platform>('/platforms/lists/parents')
 
-
-
-
-const usePlatforms = () => useData<Platform>('/platforms/lists/parents');
 
 export default usePlatforms;
+
+
+
+
