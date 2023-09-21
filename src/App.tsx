@@ -4,9 +4,19 @@ import GameGrid from "./components/GameGrid";
 import useGames from "./hooks/useGames";
 import GenreList from "./components/GenreList";
 import useData from "./hooks/useData";
+import { Genre } from "./hooks/useGenres";
+import { useState } from "react";
 
 function App() {
-  const { data, error, isLoading } = useGames();
+  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
+
+  const handleSelectGenre = (genre: Genre) => {
+    setSelectedGenre(genre);
+  };
+
+  //const visibleGenres = selectedGenre
+  //  ? genres.filter((e) => e.genre === selectedGenre)
+  // : genres;
 
   return (
     <Grid
@@ -24,13 +34,16 @@ function App() {
       </GridItem>
       <Show above="lg">
         <GridItem area="aside" paddingX={5}>
-          {isLoading && <div className="spinner-border"></div>}
-          <GenreList />
+          <GenreList
+            // genres={visibleGenres}
+            // selectedGenre={selectedGenre}
+            onSelectGenre={(genre) => setSelectedGenre(genre)}
+          />
         </GridItem>
       </Show>
 
       <GridItem area="main">
-        <GameGrid />
+        <GameGrid selectedGenre={selectedGenre} />
       </GridItem>
     </Grid>
   );
