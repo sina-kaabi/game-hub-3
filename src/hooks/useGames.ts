@@ -18,14 +18,23 @@ export interface Game {
   }
 
 
-const useGames = (gameQuery: GameQuery) => 
+const useGames = (gameQuery: GameQuery) => {
+  const platformIdToSearch = gameQuery.platform?.id;
+  const platformNameToSearch = gameQuery.platform?.name;
 
-    useData<Game>('/games', 
-    {params: 
-      {genres: gameQuery.genre?.id,
-      platforms: gameQuery.platform?.id}}, 
+// Log platform information for debugging
+console.log("Selected Platform ID:", platformIdToSearch);
+console.log("Selected Platform Name:", platformNameToSearch);
+
+// Make the Api request
+return useData<Game>('/games', {
+      params: {
+      genres: gameQuery.genre?.id,
+      platforms: platformIdToSearch, 
+      },
+    },
       [gameQuery]);
 
-
+  };
     
 export default useGames;
