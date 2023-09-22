@@ -26,11 +26,15 @@ const useGames = (gameQuery: GameQuery) => {
 console.log("Selected Platform ID:", platformIdToSearch);
 console.log("Selected Platform Name:", platformNameToSearch);
 
+// Log sorting order for debugging
+//console.log("Sorting Order:", gameQuery.sortOrder);
+
 // Make the Api request
 return useData<Game>('/games', {
       params: {
       genres: gameQuery.genre?.id,
-      platforms: platformIdToSearch, 
+      platforms: platformIdToSearch,
+      ordering: gameQuery.sortOrder 
       },
     },
       [gameQuery]);
